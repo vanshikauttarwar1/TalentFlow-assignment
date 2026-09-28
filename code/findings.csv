@@ -1,0 +1,7 @@
+Claim,Metric,Value,Method,Confidence
+"Job Boards are the biggest channel (26.9%)","Referrals % (Application level)","38.5%","Application-level Referred By override","High (Source Data)"
+"Job Boards are the biggest channel (26.9%)","Job Boards % (Application level)","23.1%","Application-level Referred By override","High (Source Data)"
+"Offer acceptance is ~72%","Resolved-Offer Acceptance Rate","83.9%","Accepted / (Accepted + Declined)","High (Source Data)"
+"Ghost Jobs / Capacity Planning","Status/Headcount Mismatch Rate","45.8% (11/24)","Hires vs Headcount vs Status comparison","High (Source Data)"
+"Duplicate Candidate Issues","Duplicate Applications (Same Req)","3 Pairs","Exact Candidate-Job match","High (Source Data)"
+"Duplicate Candidate Issues","Invalid Double-Counted Hires","1 Hire","Exact Candidate-Job match (Stage = Hired)","High (Source Data)"

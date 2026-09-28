@@ -1,0 +1,87 @@
+Product exercise — TalentFlow Q3 roadmap
+Time: 2 hours, in one sitting, scheduled whenever suits you. Everything you need is in this file.
+Two hours is a cap, not a target. We would rather have three deliverables you stand behind than five produced over an afternoon — and we will ask you how long it took.
+You are the product manager for TalentFlow, a recruiting-operations product. Acme is your largest design partner. They have given you read access to their production data — job openings, candidates, applications, interviews and offers.
+You have 6 engineer-weeks next quarter. Your job is to decide what goes into them.
+We are assessing how you turn a customer's real data into a defensible roadmap, using Claude Code and the Airtable REST API. You are not expected to write code yourself — you are expected to direct the tool well enough that you would stake a decision on the numbers it gives you.
+
+1. Access
+
+
+
+
+Base name
+TalentFlow - Acme Corp
+Base ID
+appYePRAI75PMbQNQ
+API key
+patXYZ*****
+Access level
+Read-only. Writes will return 403 — that is expected, not a bug.
+API docs
+https://airtable.com/developers/web/api/introduction
+
+Tables: Departments, People, Job Openings, Candidates, Applications, Interviews, Offers, Findings.
+A quick check that your access works:
+curl -H "Authorization: Bearer $AIRTABLE_TOKEN" \
+  "https://api.airtable.com/v0/appYePRAI75PMbQNQ/Applications?maxRecords=3"
+Put the key in an environment variable or a .env file. Do not paste it into your code.
+
+2. Two things about this API
+These are real constraints, not hints:
+Rate limit: 5 requests per second, per base. Exceeding it returns 429 and locks you out for 30 seconds.
+List endpoints return at most 100 records per request. Larger tables are paginated.
+Pull the data down once, cache it to disk, and do your analysis locally. This is the approach we would expect in production, and it will make your hour go much further than querying the API repeatedly.
+
+3. The message that started this
+Acme's VP People emailed your CEO on Friday. It has landed on you:
+"Two things for next quarter.
+First — job boards are our biggest channel by a wide margin and they bring in 26.9% of our hires. I want the job-board integration work brought forward.
+Second — our offer acceptance rate is sitting at around 72% and the board is asking about it. I need that number moving."
+Your CEO has said yes in principle. You have the data. Decide what is actually true.
+
+4. What to deliver
+Suggested timings are a guide. Weights tell you where the marks are.
+D1 — Your verdict on the VP's two claims (15 min · 16 marks)
+For each claim: build it, don't build it, or build something different. Every verdict carries the one number that decides it.
+Disagreeing with the VP is fine. Agreeing is fine. Doing either without a number is not.
+D2 — The 6 engineer-weeks (20 min · 20 marks)
+Three things you will build, in order, each with a rough size and the number that justifies it.
+Three things you will not build, each with why not.
+The not-doing list is scored as heavily as the doing list.
+D3 — A metrics spec for offer acceptance rate (15 min · 15 marks)
+The VP wants this number moving, so we are going to instrument it properly. Write the definition precisely enough that two engineers would implement it identically: numerator, denominator, edge cases, time window, and what the dashboard shows when the answer is ambiguous.
+D4 — What in this data would you not trust? (35 min · 30 marks)
+Look at the data itself, not only the questions we asked. What is wrong with it, how much of it is wrong, and how does that change your answers above?
+Be systematic. We are more interested in how you went looking than in any single problem you happen to find.
+This carries the most marks of any single deliverable. If you are short on time, come here rather than polishing D2.
+D5 — One-page memo (15 min · 19 marks)
+What you found, what you are doing about it, what you would look at next. One page.
+
+5. What to send back
+The memo, the roadmap and the metrics spec — one document is fine.
+A findings table — claim, metric, value, method, confidence. Markdown or CSV. (The Findings table in the base is read-only for you, so send this as a file rather than writing rows.)
+Your code or queries, in a repo or a zip. We will re-run them and expect your numbers back.
+Your Claude Code session transcript.
+
+6. How we assess this
+
+
+
+
+Decision quality
+your verdicts follow from the data, not from the loudest voice
+Sizing
+you know how big each problem is, and how certain, before you rank it
+Metric discipline
+your definitions survive contact with an edge case
+Judgement about the data
+you checked whether the data could carry the decision
+Communication
+the memo says what to do, not only what is true
+Use of Claude Code
+how you directed the tool, from the transcript
+
+Tooling is entirely your choice — raw REST, a client library, an MCP server, whatever you prefer.
+A number you cannot fully stand behind is worth saying so. Stating uncertainty plainly counts in your favour — including telling us a difference is too small to act on. So does telling us what you would have checked with more time.
+
